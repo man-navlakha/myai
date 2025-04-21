@@ -21,7 +21,7 @@ export function Navbar() {
                               height={0}
                               priority
                             /> </div>
-                    <div className="flex gap-4"><Button onClick={() => router.push('/login')}>Login</Button>
+                    <div className="flex gap-4"><Button onClick={() => router.push('/auth/login')}>Login</Button>
                         <ModeToggle /></div>
                 </div>
             </div>

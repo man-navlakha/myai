@@ -30,40 +30,10 @@ const Login = () => {
                 </Link>
                 <CardHeader>
                     <CardTitle className="text-2xl">Welcome Back!</CardTitle>
-                    <CardDescription>
-                        Enter your email below to login to your account
-                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form>
                         <div className="flex flex-col gap-6">
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="m@example.com"
-                                    required
-                                />
-                            </div>
-                            <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
-                                    <a
-                                        href="forget"
-                                        className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                                    >
-                                        Forgot your password?
-                                    </a>
-                                </div>
-                                <Input id="password" type="password" required />
-                            </div>
-                            <div className='flex justify-end'>
-
-                                <Button type="submit" variant="outline" className="w-20 dark:bg-[#383838] bg-[#e9e9e9] flex-end">
-                                    Login
-                                </Button>
-                            </div>
                             <Button variant="secondary" className="w-full">
                                 Login with Google
                             </Button>
