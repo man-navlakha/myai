@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -22,12 +22,12 @@ const Login = () => {
     <div className='bg-white h-screen overflow-hidden dark:bg-black dark:text-white flex justify-center w-full'>
         <div className={"w-full max-w-2xl flex flex-col justify-center gap-2 mx-4"}>
             <Card>
-                <a href="/" >
+                <Link href="/" >
                     <div className="flex flex-col items-center">
-                        <img src='/view.png' width="50px" alt="Website Logo" className="mr-2 " />
+                        {/* <img src='/view.png' width="50px" alt="Website Logo" className="mr-2 " /> */}
                         <h1 className='font-black text-xl'>Solvinger</h1>
                     </div>
-                </a>
+                </Link>
                 <CardHeader>
                     <CardTitle className="text-2xl">Welcome Back!</CardTitle>
                     <CardDescription>

@@ -4,8 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import MarkdownRenderer from '@/components/self/MarkdownRenderer';
 import Solvinger from './Solvinger';
 
