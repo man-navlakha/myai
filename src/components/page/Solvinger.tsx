@@ -27,8 +27,7 @@ const Solvinger = () => {
     
     <div className='flex justify-center content-center '>
         <div className='' >
-        <h3 className="text-3xl font-bold tracking-tighter md:text-3xl lg:text-7xl">
-    What's on <AuroraText className="font-black">your mind</AuroraText>
+        <h3 className="text-3xl font-bold tracking-tighter md:text-3xl lg:text-7xl"> What on <AuroraText className="font-black">your mind</AuroraText>
     </h3>
     <div><span className='font-medium'>Now Solvinger can do for you 😊</span></div> 
             {/* <span className='text-3xl font-black text-gray-600'>What on you mind?</span>

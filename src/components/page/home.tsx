@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MarkdownRenderer from '@/components/self/MarkdownRenderer';
 import Solvinger from './Solvinger';
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 const Hello = () => {
@@ -78,12 +79,18 @@ const Hello = () => {
         <div className='h-[420px] overflow-y-scroll p-10 dark:text-white'>
           {!review ? <Solvinger /> : (<>
             <div className='flex flex-col items-end mb-3'>
-
+              {!loading ?(<>
                <div className="flex justify-center mt-10">
       <MarkdownRenderer message={inp} />
     </div>
-            </div>
             <MarkdownRenderer message={review} />
+            </>
+          ):(
+            <>
+            <Skeleton className="w-[100px] h-[20px] rounded-full" />
+            </>
+          )}
+          </div>
           </>
           )}
         </div>
