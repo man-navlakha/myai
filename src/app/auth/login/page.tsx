@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Login ',
-  description: 'Learn more about our company and mission',
+  description: '',
 };
 
 const Login = () => {

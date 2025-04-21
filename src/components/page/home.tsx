@@ -9,9 +9,6 @@ import Solvinger from './Solvinger';
 
 const Hello = () => {
 
-  interface ApiResponse {
-    message: string;
-  }
   const [code, setCode] = useState('');
   const [inp, setInp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,14 +24,14 @@ const Hello = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post<ApiResponse>(
+      const response = await axios.post (
         'https://solvinger-v1.onrender.com/ai/get-review',
         { code }
       );
       console.log(response.data)
 
       setInp(code)
-      const message = response.data.message || 'No review received.';
+      const message = response.data || 'No review received.';
       setReview(message);
 
 
