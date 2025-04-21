@@ -30,14 +30,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
     }) => {
       if (inline) {
         return (
-          <code className="bg-gray-100 text-sm px-1 py-0.5 rounded">
+          <code className="bg-gray-600 text-white dark:bg-gray-100 dark:text-black text-sm px-1 py-0.5 rounded">
             {children}
           </code>
         );
       }
 
       return (
-        <pre className="bg-gray-100 my-4 rounded-md overflow-x-auto text-sm">
+        <pre className="bg-gray-600 text-white dark:bg-gray-100 dark:text-black  my-4 rounded-sm overflow-x-auto text-sm">
           <code className={className} {...props}>
             {children}
           </code>

@@ -4,12 +4,14 @@ import { Button } from "../ui/button"
 import { ModeToggle } from "./ModeToggle"
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import { MagicCard } from "@/components/magicui/magic-card";
 
 export function Navbar() {
     const router = useRouter();
 
     return (
         <>
+        <MagicCard   gradientColor="dark:#262626 #D9D9D955">
             <div className="w-full dark:bg-white/30 bg-black/30 p-4 sticky top-0 backdrop-blur-md">
                 <div className="flex flex-cols justify-between items-center ">
 
@@ -25,6 +27,8 @@ export function Navbar() {
                         <ModeToggle /></div>
                 </div>
             </div>
+            </MagicCard>
+
         </>
     )
 }
