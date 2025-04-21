@@ -12,7 +12,7 @@ import { Metadata } from 'next';
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'Login ',
   description: 'Learn more about our company and mission',
 };
 
