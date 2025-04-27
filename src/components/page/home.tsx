@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Navbar } from '@/components/self/Navbar';
 import MarkdownRenderer from '@/components/self/MarkdownRenderer';
 import Solvinger from './Solvinger';
-import { useSpeechRecognition } from '@/components/self/useSpeechRecognition';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import 'react-toastify/dist/ReactToastify.css';
 import { Mic, Send } from 'lucide-react';
 
@@ -15,22 +15,41 @@ const Hello = () => {
   const [inp, setInp] = useState('');
   const [loading, setLoading] = useState(false);
   const [review, setReview] = useState<string | null>(null);
-  const { isListening, transcript, startListening, error } = useSpeechRecognition();
-
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
+  const [lastTranscript, setLastTranscript] = useState('');
+ 
+  // Sync transcript to code while listening
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (!listening) return;
+  
+    if (transcript !== lastTranscript) {
+      const newText = transcript.replace(lastTranscript, '');
+      setCode((prev) => prev + newText);
+      setLastTranscript(transcript);
     }
-  }, [error]);
+  }, [transcript, lastTranscript, listening]);
+
+  const handleToggleListening = () => {
+    if (listening) {
+      SpeechRecognition.stopListening();
+    } else {
+      if (browserSupportsSpeechRecognition) {
+        resetTranscript(); // Start fresh
+        SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
+      } else {
+        console.error('Speech recognition is not supported in this browser.');
+      }
+    }
+  };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Automatically update the input with spoken text
-  useEffect(() => {
-    if (transcript) {
-      setCode((prev) => (prev ? prev + ' ' + transcript : transcript));
-    }
-  }, [transcript]);
+  // // Automatically update the input with spoken text
+  // useEffect(() => {
+  //   if (transcript) {
+  //     setCode((prev) => (prev ? prev + ' ' + transcript : transcript));
+  //   }
+  // }, [transcript]);
 
   // Auto resize textarea
   useEffect(() => {
@@ -61,7 +80,7 @@ const Hello = () => {
       setInp(codeToReview);
       setReview(result);
       setCode('');
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error)) {
         const errorMsg = error.response?.data?.message || error.message;
         setReview('Error while reviewing the code: ' + errorMsg);
@@ -105,15 +124,11 @@ const Hello = () => {
               onChange={(e) => setCode(e.target.value)}
               disabled={loading}
             />
-
-            <button
-              onClick={startListening}
-              className={`p-2 rounded ${isListening ? 'bg-red-500 text-white' : 'bg-blue-500/30'} dark:text-white text-black rounded-3xl`}
-              aria-label="Toggle voice input"
-            >
-                  <Mic />
-
-            </button>
+         <button onClick={handleToggleListening}  className={`p-2 rounded ${listening ? 'bg-red-500 text-white' : 'bg-blue-500/30'} dark:text-white text-black rounded-3xl`}
+              aria-label="Toggle voice input">
+        <Mic />
+      </button>
+          
 
             {code.trim() && (
               <button
