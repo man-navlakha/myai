@@ -29,7 +29,7 @@ const Solvinger = () => {
         <div className='' >
         <h3 className="text-3xl font-bold tracking-tighter md:text-3xl lg:text-7xl"> What on <AuroraText className="font-black">your mind</AuroraText>
     </h3>
-    <div><span className='font-medium'>Now Solvinger can do for you 😊</span></div> 
+    <div><span className='font-medium text-lg lg:text-xl float-right'>Now Solvinger can do for you 😊</span></div> 
             {/* <span className='text-3xl font-black text-gray-600'>What on you mind?</span>
     <h1 className="text-balance text-2xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
       Solvinger Do for  
