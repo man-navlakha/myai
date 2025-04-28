@@ -3,12 +3,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { Navbar } from '@/components/self/Navbar';
+import { Navbar } from "@/components/self/Navbar";
 import MarkdownRenderer from '@/components/self/MarkdownRenderer';
 import Solvinger from './Solvinger';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import 'react-toastify/dist/ReactToastify.css';
 import { Mic, Send } from 'lucide-react';
+import Sidebar from '@/components/self/Sidebar';
 
 const Hello = () => {
   const [code, setCode] = useState('');
@@ -17,6 +18,7 @@ const Hello = () => {
   const [review, setReview] = useState<string | null>(null);
   const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
  
   // Sync transcript to code while listening
   useEffect(() => {
@@ -93,10 +95,12 @@ const Hello = () => {
   };
 
   return (
-    <div className="dark:bg-black min-h-screen">
-      <Navbar />
+    <div className='flex'>
+       <Sidebar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
+    <div className="dark:bg-black min-h-screen flex-1">
+    <Navbar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
 
-      <div className="p-10 h-[420px] overflow-y-scroll dark:text-white">
+      <div className="px-10 py-3 h-[520px] overflow-y-scroll dark:text-white">
         {!review ? (
           <Solvinger />
         ) : (
@@ -157,6 +161,8 @@ const Hello = () => {
       <div className="flex justify-center py-3 md:py-5 lg:py-1 dark:text-white">
         <p>AI may make mistakes. So double-check it.</p>
       </div>
+    </div>
+    
     </div>
   );
 };

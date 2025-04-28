@@ -40,6 +40,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
         <pre className="bg-gray-600 text-white dark:bg-gray-100 dark:text-black  my-4 rounded-sm overflow-x-auto text-sm">
           <code className={className} {...props}>
             {children}
+          
           </code>
         </pre>
       );
@@ -50,6 +51,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
     <div className="w-full max-w-2xl p-4 border rounded-lg shadow-sm bg-blue-900/30 dark:bg-gray-100/30 dark:text-white">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {message}
+        
       </ReactMarkdown>
     </div>
   );
