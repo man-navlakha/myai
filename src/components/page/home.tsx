@@ -19,11 +19,11 @@ const Hello = () => {
   const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
- 
+
   // Sync transcript to code while listening
   useEffect(() => {
     if (!listening) return;
-  
+
     if (transcript !== lastTranscript) {
       const newText = transcript.replace(lastTranscript, '');
       setCode((prev) => prev + newText);
@@ -95,75 +95,89 @@ const Hello = () => {
   };
 
   return (
-    <div className='flex'>
-       <Sidebar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
-    <div className="dark:bg-black min-h-screen flex-1">
-    <Navbar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
 
-      <div className="px-10 py-3 h-[520px] overflow-y-scroll dark:text-white">
-        {!review ? (
-          <Solvinger />
-        ) : (
-          <>
-            <div className="flex flex-col items-end mb-3">
-              <div className="flex justify-center mt-10">
-                <MarkdownRenderer message={inp} />
+      {/* Main Content Area */}
+      <div className="flex flex-col flex-1">
+
+        {/* Navbar */}
+        <Navbar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
+        <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+
+        {/* Scrollable Content Section */}
+        <div className="flex-1 min-h-[320px] max-h-scree md:max-h-[95vh] overflow-y-auto px-6 py-4">
+          {!review ? (
+            <Solvinger onItemClick={(text: string) => setCode(text)} />
+          ) : (
+            <>
+              <div className="flex flex-col items-center gap-4 mb-6">
+                <div className="w-full max-w-3xl">
+                  <MarkdownRenderer message={inp} />
+                </div>
+              </div>
+              <div className="w-full max-w-3xl mx-auto">
+                <MarkdownRenderer message={review} />
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Input Panel */}
+        <div className="w-full sticky bottom-0 px-4 py-3 mt-5">
+          <div className="max-w-4xl mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-md border border-white/20 bg-white/10 backdrop-blur-lg dark:border-white/10">
+
+            <div className="flex flex-col sm:flex-row  gap-3">
+              <textarea
+                ref={textareaRef}
+                className="flex-1 w-full resize-none text-black overflow-y-auto rounded-lg p-3 min-h-[4rem] max-h-40 bg-white/20 dark:bg-black/30 border dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-gradient"
+                placeholder="Type your message..."
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                disabled={loading}
+              />
+
+              <div className="flex gap-2 items-center justify-between">
+                <button
+                  onClick={handleToggleListening}
+                  aria-label="Toggle voice input"
+                  className={`p-3 rounded-xl border transition ${listening
+                      ? 'bg-red-500 text-white'
+                      : 'bg-white/20 hover:bg-gray-300/30 dark:hover:bg-white/30 text-black dark:text-white'
+                    } dark:border-white/20`}
+                >
+                  <Mic />
+                </button>
+
+                {code.trim() && (
+                  <button
+                    onClick={handleSend}
+                    disabled={loading}
+                    aria-label="Send message"
+                    className={`p-3 rounded-xl transition ${loading
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      }`}
+                  >
+                    {loading ? (
+                      <div className="animate-spin border-2 border-white border-t-transparent rounded-full w-6 h-6" />
+                    ) : (
+                      <Send />
+                    )}
+                  </button>
+                )}
               </div>
             </div>
-            <MarkdownRenderer message={review} />
-          </>
-        )}
-      </div>
 
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
-
-      <div className="flex justify-center w-full">
-        <div className="w-full max-w-2xl p-4 border rounded-lg shadow-sm flex flex-col gap-2 mx-4">
-          <div className="flex items-end gap-2 bg-white dark:bg-black dark:text-white">
-            <textarea
-              ref={textareaRef}
-              className="flex-1 resize-none overflow-hidden overflow-y-scroll border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[3rem] max-h-40 dark:bg-black dark:text-white bg-white"
-              placeholder="Type your message..."
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              disabled={loading}
-            />
-         <button onClick={handleToggleListening}  className={`p-2 rounded ${listening ? 'bg-red-500 text-white' : 'bg-blue-500/30'} dark:text-white text-black rounded-3xl`}
-              aria-label="Toggle voice input">
-        <Mic />
-      </button>
-          
-
-            {code.trim() && (
-              <button
-                onClick={handleSend}
-                disabled={loading}
-                className={`p-2 text-white rounded-md transition-colors duration-200 ${
-                  loading
-                    ? 'bg-gray-300 cursor-not-allowed'
-                    : 'bg-blue-500 hover:bg-blue-600'
-                }`}
-                aria-label="Send message"
-              >
-                {loading ? (
-                  <div className="flex items-center gap-1">
-                    <span className="animate-spin border-2 border-blue-500 border-t-transparent rounded-full w-6 h-6" />
-                  </div>
-                ) : (
-                  <Send/>
-                )}
-              </button>
-            )}
+            <p className="text-center text-sm text-black/70 dark:text-white/50 mt-2">
+              AI may make mistakes. Always verify responses.
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div className="flex justify-center py-3 md:py-5 lg:py-1 dark:text-white">
-        <p>AI may make mistakes. So double-check it.</p>
-      </div>
-    </div>
-    
-    </div>
   );
 };
 

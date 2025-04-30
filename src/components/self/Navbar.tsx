@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import { MagicCard } from "@/components/magicui/magic-card";
+// import { MagicCard } from "@/components/magicui/magic-card";
 import { ArrowRightFromLine  } from "lucide-react";
 
 interface NavbarProps {
@@ -17,33 +17,41 @@ export function Navbar({ isOpen,onToggleSidebar }: NavbarProps) {
   const router = useRouter();
 
   return (
-    <MagicCard gradientColor="dark:#262626 #D9D9D955">
-      <div className="w-full dark:bg-white/30 bg-black/30 p-4 sticky top-0 backdrop-blur-md">
-        <div className="flex justify-between items-center">
-          {/* Sidebar toggle button */}
-          <div className="flex">
-            {!isOpen ? (
-
-                <button onClick={onToggleSidebar}>
-            <ArrowRightFromLine />
+    <div className="w-full sticky top-0 z-10 bg-white/30 dark:bg-black/30 backdrop-blur-md bg-opacity-10 border-b border-white/20 shadow-sm px-4 py-3">
+    <div className="flex justify-between items-center max-w-7xl mx-auto">
+      
+      {/* Left: Logo & Sidebar Toggle */}
+      <div className="flex items-center gap-3">
+        {!isOpen && (
+          <button
+            onClick={onToggleSidebar}
+            aria-label="Open sidebar"
+            className="p-2 rounded hover:bg-white/30 dark:hover:bg-white/10 transition"
+          >
+            <ArrowRightFromLine className="w-5 h-5 text-black dark:text-white" />
           </button>
-        ):''}
-          <Image
-            className="dark:contrast mx-3"
-            src="/view.png"
-            alt="Logo"
-            width={40}
-            height={40}
-            priority
-            />
-            </div>
-
-          <div className="flex items-center gap-4">
-            <Button onClick={() => router.push('/auth/login')}>Login</Button>
-            <ModeToggle />
-          </div>
-        </div>
+        )}
+  
+        <Image
+          className="dark:contrast"
+          src="/view.png"
+          alt="Logo"
+          width={40}
+          height={40}
+          priority
+        />
       </div>
-    </MagicCard>
+  
+      {/* Right: Controls */}
+      <div className="flex items-center gap-3">
+        <Button onClick={() => router.push('/auth/login')} className="text-sm font-medium">
+          Login
+        </Button>
+        <ModeToggle />
+      </div>
+    </div>
+  </div>
+  
+
   );
 }
