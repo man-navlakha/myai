@@ -13,10 +13,8 @@ import Sidebar from '@/components/self/Sidebar';
 
 const Hello = () => {
   const [code, setCode] = useState('');
-  const [inp, setInp] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'assistant', message: string }[]>([]);
-  const [review, setReview] = useState<string | null>(null);
   const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -101,7 +99,7 @@ const Hello = () => {
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
 
         {/* Scrollable Content Section */}
-        <div className="w-full max-w-3xl mx-auto flex flex-col gap-4   flex-1 min-h-[320px] max-h-scree md:max-h-[95vh] overflow-y-auto px-6 py-4">
+        <div className="w-full max-w-3xl mx-auto flex flex-col gap-4  py-5">
   {chatHistory.length === 0 && (
     <Solvinger onItemClick={(text: string) => setCode(text)} />
   )}

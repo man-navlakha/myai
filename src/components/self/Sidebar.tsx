@@ -32,7 +32,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }: SidebarProps) => {
       <p>Chats </p>
     <Link
         href="/"
-        className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+        className="flex items-center gap-3 px-3 py-2 rounded-md opacity-50 hover:bg-gray-200  dark:hover:bg-gray-700 transition"
       >
         <MessagesSquare  />
         <span className=" md:block">Home</span>
