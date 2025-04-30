@@ -99,7 +99,7 @@ const Hello = () => {
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
 
         {/* Scrollable Content Section */}
-        <div className="w-full max-w-3xl mx-auto flex flex-col gap-4  py-5">
+        <div className="w-full max-w-3xl md:max-w-[20rem] mx-auto flex flex-col gap-4  py-5">
   {chatHistory.length === 0 && (
     <Solvinger onItemClick={(text: string) => setCode(text)} />
   )}
