@@ -15,6 +15,7 @@ const Hello = () => {
   const [code, setCode] = useState('');
   const [inp, setInp] = useState('');
   const [loading, setLoading] = useState(false);
+  const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'assistant', message: string }[]>([]);
   const [review, setReview] = useState<string | null>(null);
   const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
@@ -46,13 +47,6 @@ const Hello = () => {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // // Automatically update the input with spoken text
-  // useEffect(() => {
-  //   if (transcript) {
-  //     setCode((prev) => (prev ? prev + ' ' + transcript : transcript));
-  //   }
-  // }, [transcript]);
-
   // Auto resize textarea
   useEffect(() => {
     const textarea = textareaRef.current;
@@ -74,25 +68,25 @@ const Hello = () => {
   const reviewCode = async (codeToReview: string) => {
     setLoading(true);
     try {
+      setChatHistory(prev => [...prev, { role: 'user', message: codeToReview }]);
+  
       const response = await axios.post('https://solvinger-v1.onrender.com/ai/get-review', {
         code: codeToReview,
       });
-
+  
       const result = response.data || 'No review received.';
-      setInp(codeToReview);
-      setReview(result);
+      setChatHistory(prev => [...prev, { role: 'assistant', message: result }]);
       setCode('');
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const errorMsg = error.response?.data?.message || error.message;
-        setReview('Error while reviewing the code: ' + errorMsg);
-      } else {
-        setReview('An unexpected error occurred.');
-      }
+      const errorMsg = axios.isAxiosError(error)
+        ? error.response?.data?.message || error.message
+        : 'An unexpected error occurred.';
+      setChatHistory(prev => [...prev, { role: 'assistant', message: `Error: ${errorMsg}` }]);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex min-h-screen">
@@ -107,22 +101,18 @@ const Hello = () => {
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
 
         {/* Scrollable Content Section */}
-        <div className="flex-1 min-h-[320px] max-h-scree md:max-h-[95vh] overflow-y-auto px-6 py-4">
-          {!review ? (
-            <Solvinger onItemClick={(text: string) => setCode(text)} />
-          ) : (
-            <>
-              <div className="flex flex-col items-center gap-4 mb-6">
-                <div className="w-full max-w-3xl">
-                  <MarkdownRenderer message={inp} />
-                </div>
-              </div>
-              <div className="w-full max-w-3xl mx-auto">
-                <MarkdownRenderer message={review} />
-              </div>
-            </>
-          )}
-        </div>
+        <div className="w-full max-w-3xl mx-auto flex flex-col gap-4   flex-1 min-h-[320px] max-h-scree md:max-h-[95vh] overflow-y-auto px-6 py-4">
+  {chatHistory.length === 0 && (
+    <Solvinger onItemClick={(text: string) => setCode(text)} />
+  )}
+
+  {chatHistory.map((entry, idx) => (
+    <div key={idx} className={`p-3 rounded-md ${entry.role === 'user' ? 'bg-blue-100 dark:bg-blue-900 self-end' : 'bg-gray-100 dark:bg-gray-800 self-start'}`}>
+      <MarkdownRenderer message={entry.message} />
+    </div>
+  ))}
+</div>
+
 
         {/* Input Panel */}
         <div className="w-full sticky bottom-0 px-4 py-3 mt-5">
