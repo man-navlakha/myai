@@ -6,7 +6,7 @@ import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 // import { MagicCard } from "@/components/magicui/magic-card";
-import { ArrowRightFromLine  } from "lucide-react";
+import { ArrowRightFromLine, GripVertical   } from "lucide-react";
 
 interface NavbarProps {
     isOpen: boolean;
@@ -28,7 +28,7 @@ export function Navbar({ isOpen,onToggleSidebar }: NavbarProps) {
             aria-label="Open sidebar"
             className="p-2 rounded hover:bg-white/30 dark:hover:bg-white/10 transition"
           >
-            <ArrowRightFromLine className="w-5 h-5 text-black dark:text-white" />
+            <GripVertical  className="w-5 h-5 text-black dark:text-white " />
           </button>
         )}
   

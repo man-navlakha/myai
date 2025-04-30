@@ -11,7 +11,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }: SidebarProps) => {
     <div
     className={`fixed top-0 left-0 z-50 h-screen transition-all duration-300 ease-in-out
       ${isOpen ? 'w-screen md:w-64' : 'w-0 md:w-0 overflow-hidden'}
-      bg-white/70 dark:bg-gray-900/80 backdrop-blur-md shadow-md border-r border-white/20 text-black dark:text-white`}
+ bg-white/70 dark:bg-black/80 backdrop-blur-md shadow-md border-r border-white/20 text-black dark:text-white`}
   >
     {/* Header */}
     <div className="flex items-center justify-between p-4 border-b border-gray-300 dark:border-gray-700">
@@ -35,7 +35,21 @@ const Sidebar = ({ isOpen, onToggleSidebar }: SidebarProps) => {
         className="flex items-center gap-3 px-3 py-2 rounded-md opacity-50 hover:bg-gray-200  dark:hover:bg-gray-700 transition"
       >
         <MessagesSquare  />
-        <span className=" md:block">Home</span>
+        <span className=" md:block">Chats</span>
+      </Link>
+    <Link
+        href="/"
+        className="flex items-center gap-3 px-3 py-2 rounded-md opacity-50 hover:bg-gray-200  dark:hover:bg-gray-700 transition"
+      >
+        <MessagesSquare  />
+        <span className=" md:block">Chats</span>
+      </Link>
+    <Link
+        href="/"
+        className="flex items-center gap-3 px-3 py-2 rounded-md opacity-50 hover:bg-gray-200  dark:hover:bg-gray-700 transition"
+      >
+        <MessagesSquare  />
+        <span className=" md:block">Chats</span>
       </Link>
     </div>
   
