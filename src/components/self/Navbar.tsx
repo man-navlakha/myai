@@ -6,7 +6,7 @@ import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 // import { MagicCard } from "@/components/magicui/magic-card";
-import { ArrowRightFromLine, GripVertical   } from "lucide-react";
+import { GripVertical   } from "lucide-react";
 
 interface NavbarProps {
     isOpen: boolean;
