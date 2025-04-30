@@ -48,7 +48,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
   };
 
   return (
-    <div className="w-full max-w-2xl md:max-w-[20rem] lg:max-w-3xl p-4 border rounded-lg shadow-sm bg-blue-900/30 dark:bg-gray-100/30 dark:text-white">
+    <div className="w-full min-w-[15rem] max-w-[20rem] md:max-w-[20rem] lg:max-w-3xl p-4 border rounded-lg shadow-sm bg-blue-900/30 dark:bg-gray-100/30 dark:text-white">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {message}
         
