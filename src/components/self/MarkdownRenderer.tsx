@@ -18,40 +18,46 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       <ol className="list-decimal pl-6 my-2 space-y-1">{children}</ol>
     ),
     li: ({ children }) => <li className="text-base">{children}</li>,
-    code: ({
-      inline,
-      className,
-      children,
-      ...props
-    }: {
-      inline?: boolean;
-      className?: string;
-      children?: React.ReactNode;
-    }) => {
-      if (inline) {
+    code({ className, children }) {
+      const codeText = String(children).trim();
+      const language = className?.replace('language-', '') || 'text';
+      const isInline = !className;
+
+      if (isInline) {
         return (
-          <code className="bg-gray-600 text-white dark:bg-gray-100 dark:text-black text-sm px-1 py-0.5 rounded">
-            {children}
+          <code className="bg-gray-700 text-white px-1 py-0.5 rounded text-sm font-mono">
+            {codeText}
           </code>
         );
       }
 
       return (
-        <pre className="bg-gray-600 text-white dark:bg-gray-100 dark:text-black px-3 py-4 my-4 rounded-sm overflow-x-auto text-sm">
-          <code className={className} {...props}>
-            {children}
-          
-          </code>
-        </pre>
+        <div className="relative bg-[#1e1e1e] rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+          <div className="flex items-center justify-between text-xs px-4 py-2 bg-[#2d2d2d] text-white font-mono">
+            <span className="lowercase">{language}</span>
+            <button
+              onClick={() => navigator.clipboard.writeText(codeText)}
+              className="text-white hover:text-green-400 transition text-xs"
+            >
+              Copy
+            </button>
+          </div>
+          <div className="overflow-auto">
+            <pre className="p-4 text-sm text-green-400 whitespace-pre-wrap break-words">
+              <code className={`language-${language}`}>{codeText}</code>
+            </pre>
+          </div>
+        </div>
       );
     },
+    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+    h3: ({ children }) => <h3 className="text-xl font-bold text-white mt-4 mb-2">{children}</h3>,
   };
 
   return (
     <div className="w-full min-w-[15rem] max-w-[20rem] md:max-w-[20rem] lg:max-w-3xl p-4 border rounded-lg shadow-sm bg-blue-900/30 dark:bg-gray-100/30 dark:text-white">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {message}
-        
       </ReactMarkdown>
     </div>
   );
