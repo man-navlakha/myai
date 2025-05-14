@@ -181,3 +181,74 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.wave_graphic {
+  width: 4px;
+  height: 20px;
+  border-radius: 10px;
+  filter: blur(1px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.308), rgb(255, 0, 0));
+  margin: -0 -1px;
+}
+
+.wave_fade {
+  animation: fade 1400ms ease-in-out infinite alternate;
+}
+.wave_translate {
+  animation: translate 2000ms ease-in-out infinite alternate;
+}
+.wave_skew {
+  animation: skew 2000ms ease-in-out infinite alternate;
+}
+
+@keyframes fade {
+  0%, 5% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes skew {
+  0% {
+    transform: skewY(-17.5deg);
+  }
+  100% {
+    transform: skewY(17.5deg);
+  }
+}
+
+@keyframes translate {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+
+/* send button  */
+.move-right {
+  display: inline-block;
+  animation: moveRight 5s forwards;
+}
+
+@keyframes moveRight {
+  to {
+    transform: translateX(200px); /* Adjust distance */
+  }
+}
+.move-wi {
+  display: inline-block;
+  animation: widthdown 2s forwards;
+}
+
+@keyframes widthdown {
+  to {
+    width: 75px;
+    border-radius: 10%;
+  }
+}

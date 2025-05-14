@@ -10,6 +10,14 @@ type Feature = {
 
 const features: Feature[] = [
   {
+    title: 'we can now review / analyze / understand.',
+    items: [
+      "How would you use `async/await` to fetch data from a URL, and handle potential errors gracefully?",
+      'How do you read the contents of a text file named `data.txt` and print each line to the console?',
+      'Describe the logic behind the bubble sort algorithm. How does it work to sort an array of numbers?',
+    ],
+  },
+  {
     title: 'Automate tasks by setting a schedule',
     items: [
       'Daily email summaries and priorities',
@@ -34,7 +42,7 @@ interface FeatureSectionProps {
 
 const FeatureSection: React.FC<FeatureSectionProps> = ({ onItemClick }) => {
   return (
-    <div className="w-full  bg-gradient-to-b from-white/60 to-transparent dark:from-black/40 dark:to-black/90">
+    <div className="w-full dark:from-black/40 dark:to-black/90">
       {/* Badge */}
       <div className="flex justify-center">
         <div className="group rounded-full border border-gray-900/10 dark:border-white/10  bg-white/30 dark:bg-white/10 text-white backdrop-blur-md transition hover:bg-white/50 dark:hover:bg-white/20">
