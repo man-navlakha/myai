@@ -21,62 +21,62 @@ const Hello = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 
-  const escapeHtml = (unsafe: string) => {
-    return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-  };
-  const formatMessageContent = (content: string, references?: { pageNumber: number }[]) => {
-    if (!content) return "";
+  // const escapeHtml = (unsafe: string) => {
+  //   return unsafe
+  //     .replace(/&/g, "&amp;")
+  //     .replace(/</g, "&lt;")
+  //     .replace(/>/g, "&gt;");
+  // };
+  // const formatMessageContent = (content: string, references?: { pageNumber: number }[]) => {
+  //   if (!content) return "";
 
-    let formatted = escapeHtml(content);
+  //   let formatted = escapeHtml(content);
 
-    // Format code blocks: ```lang\ncode\n```
-    formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (_match, lang, code) => {
-      const language = lang || "text";
-      const escapedCode = escapeHtml(code);
+  //   // Format code blocks: ```lang\ncode\n```
+  //   formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (_match, lang, code) => {
+  //     const language = lang || "text";
+  //     const escapedCode = escapeHtml(code);
 
-      // Create the formatted HTML with a "Copy" button
-      return `
-      <div className="relative bg-[#1e1e1e] rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
-        <div className="flex items-center justify-between text-xs px-4 py-2 bg-[#2d2d2d] text-white font-mono">
-          <span className="lowercase">${language}</span>
-          <div className="flex gap-2">
-            <button className="copy-code-button text-white hover:text-green-400 transition" data-code="${encodeURIComponent(code)}">Copy</button>
-          </div>
-        </div>
-        <div className="overflow-auto">
-          <pre className="p-4 text-sm text-green-400 whitespace-pre-wrap break-words">
-            <code className="language-${language}">${escapedCode}</code>
-          </pre>
-        </div>
-      </div>
-      `;
-    });
+  //     // Create the formatted HTML with a "Copy" button
+  //     return `
+  //     <div className="relative bg-[#1e1e1e] rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+  //       <div className="flex items-center justify-between text-xs px-4 py-2 bg-[#2d2d2d] text-white font-mono">
+  //         <span className="lowercase">${language}</span>
+  //         <div className="flex gap-2">
+  //           <button className="copy-code-button text-white hover:text-green-400 transition" data-code="${encodeURIComponent(code)}">Copy</button>
+  //         </div>
+  //       </div>
+  //       <div className="overflow-auto">
+  //         <pre className="p-4 text-sm text-green-400 whitespace-pre-wrap break-words">
+  //           <code className="language-${language}">${escapedCode}</code>
+  //         </pre>
+  //       </div>
+  //     </div>
+  //     `;
+  //   });
 
-    // Format ### headers as h3 titles
-    formatted = formatted.replace(/^### (.*)$/gm, `<h3 className="text-xl font-bold text-white mt-4 mb-2">$1</h3>`);
+  //   // Format ### headers as h3 titles
+  //   formatted = formatted.replace(/^### (.*)$/gm, `<h3 className="text-xl font-bold text-white mt-4 mb-2">$1</h3>`);
 
-    // Format bold: **text**
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  //   // Format bold: **text**
+  //   formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-    // Format inline code: `code`
-    formatted = formatted.replace(/`([^`]+?)`/g, `<code className="bg-gray-800 text-green-400 px-1 py-0.5 rounded text-sm">$1</code>`);
+  //   // Format inline code: `code`
+  //   formatted = formatted.replace(/`([^`]+?)`/g, `<code className="bg-gray-800 text-green-400 px-1 py-0.5 rounded text-sm">$1</code>`);
 
-    // Highlight page references like [P5]
-    if (references) {
-      references.forEach((ref) => {
-        const pageRef = `[P${ref.pageNumber}]`;
-        formatted = formatted.replace(
-          escapeHtml(pageRef),
-          `<span className="text-blue-400 font-semibold">${pageRef}</span>`
-        );
-      });
-    }
+  //   // Highlight page references like [P5]
+  //   if (references) {
+  //     references.forEach((ref) => {
+  //       const pageRef = `[P${ref.pageNumber}]`;
+  //       formatted = formatted.replace(
+  //         escapeHtml(pageRef),
+  //         `<span className="text-blue-400 font-semibold">${pageRef}</span>`
+  //       );
+  //     });
+  //   }
 
-    return formatted;
-  };
+  //   return formatted;
+  // };
 
 
 
