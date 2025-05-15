@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Copy } from 'lucide-react';
 import { Components } from 'react-markdown';
 
 interface MarkdownRendererProps {
@@ -25,25 +26,25 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
 
       if (isInline) {
         return (
-          <code className="bg-gray-700 text-white px-1 py-0.5 rounded text-sm font-mono">
+          <code className="bg-gray-200 dark:bg-gray-200/30 px-1 py-0.5 rounded text-sm font-mono">
             {codeText}
           </code>
         );
       }
 
       return (
-        <div className="relative bg-[#1e1e1e] rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
-          <div className="flex items-center justify-between text-xs px-4 py-2 bg-[#2d2d2d] text-white font-mono">
+        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+          <div className="flex items-center justify-between text-xs px-4 py-2 dark:bg-[#2d2d2d] bg-[#ddd] dark:text-white font-mono">
             <span className="lowercase">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(codeText)}
-              className="text-white hover:text-green-400 transition text-xs"
+              className="dark:text-white sticky top-10 hover:cursor-pointer flex transition text-xs"
             >
-              Copy
+             <Copy className='h-2'/> Copy
             </button>
           </div>
-          <div className="overflow-auto">
-            <pre className="p-4 text-sm text-green-400 whitespace-pre-wrap break-words">
+          <div className="overflow-auto dar:bg-[#171717]">
+            <pre className="p-4 text-sm  whitespace-pre! language-javascript break-words">
               <code className={`language-${language}`}>{codeText}</code>
             </pre>
           </div>
@@ -55,7 +56,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
   };
 
   return (
-    <div className="w-full min-w-[15rem] max-w-[20rem] md:max-w-[20rem] lg:max-w-3xl p-4 border rounded-lg shadow-sm bg-blue-900/30 dark:bg-gray-100/30 dark:text-white">
+    <div className="w-full min-w-[15rem] max-w-[20rem] md:max-w-[20rem] lg:max-w-3xl p-4 dark:text-white">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {message}
       </ReactMarkdown>
