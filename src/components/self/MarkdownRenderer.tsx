@@ -33,14 +33,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       }
 
       return (
-        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full my-2 md:max-w-4xl">
           <div className="flex items-center justify-between text-xs px-4 py-2 dark:bg-[#2d2d2d] bg-[#ddd] dark:text-white font-mono">
             <span className="lowercase">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(codeText)}
               className="dark:text-white sticky top-10 hover:cursor-pointer flex transition text-xs"
             >
-             <Copy className='h-2'/> Copy
+             <Copy className='h-4'/> Copy
             </button>
           </div>
           <div className="overflow-auto dar:bg-[#171717]">
@@ -51,7 +51,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
         </div>
       );
     },
-    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+    strong: ({ children }) => <h1 className="font-semibold my-2 ">{children}</h1>,
     h3: ({ children }) => <h3 className="text-xl font-bold text-white mt-4 mb-2">{children}</h3>,
   };
 
