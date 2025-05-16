@@ -124,14 +124,14 @@ const Hello = () => {
 
 
         {/* Input Panel */}
-        <div className="w-full sticky bottom-0 px-4 py-3 mt-5 overflow-hidden">
+        <div className="w-full sticky bottom-0 px-2 py-3 min-h-10 mt-5 overflow-hidden">
           <div className="max-w-4xl overflow-hidden mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-md border border-black/20 dark:border-[white]/20 dark:bg-[#303030]/80 backdrop-blur-lg z-2">
 
             <div className="flex flex-col sm:flex-row gap-3">
             
               <textarea
                 ref={textareaRef}
-                className="flex-1 rounded w-full mb-3 text-black overflow-y-auto min-h-[4rem] max-h-40 bg-white/50 z-2 dark:bg-[#303030]/0 border-none md:border-b outline-none dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
+                className="flex-1 rounded w-full mb-3 text-black overflow-y-auto min-h-20 max-h-40 bg-white/50 z-2 dark:bg-[#303030]/0 border-none md:border-b outline-none dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
                 placeholder="Type your message..."
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
@@ -179,7 +179,7 @@ const Hello = () => {
               </div>
             </div>
 
-            <p className="text-center text-sm text-black/70 dark:text-white/50 mt-2">
+            <p className="text-center text-sm text-black dark:text-white/50 mt-2">
               Solvinger may make mistakes. Always verify responses.
             </p>
           </div>
