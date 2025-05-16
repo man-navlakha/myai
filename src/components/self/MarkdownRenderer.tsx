@@ -33,7 +33,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       }
 
       return (
-        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mt-2 mb-4 w-full max-w-full md:max-w-4xl">
+        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-gray-900 border rounded-md overflow-hidden mt-2 mb-4 w-full max-w-full md:max-w-4xl">
           <div className="flex items-center justify-between text-xs px-4 py-2 dark:bg-[#2d2d2d] bg-[#ddd] dark:text-white font-mono">
             <span className="lowercase">{language}</span>
             <button
@@ -43,7 +43,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
              <Copy className='h-4'/> Copy
             </button>
           </div>
-          <div className="overflow-auto dar:bg-[#171717]">
+          <div className="overflow-auto dark:bg-[#171717]">
             <pre className="p-4 text-sm  whitespace-pre! language-javascript break-words">
               <code className={`language-${language}`}>{codeText}</code>
             </pre>
