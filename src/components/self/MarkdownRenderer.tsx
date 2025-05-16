@@ -33,7 +33,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       }
 
       return (
-        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mt-2 mb-4 w-full max-w-full md:max-w-4xl">
           <div className="flex items-center justify-between text-xs px-4 py-2 dark:bg-[#2d2d2d] bg-[#ddd] dark:text-white font-mono">
             <span className="lowercase">{language}</span>
             <button
@@ -51,7 +51,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
         </div>
       );
     },
-    strong: ({ children }) => <strong className="font-semibold m-1">{children}</strong>,
+    h1: ({ children }) => <strong className="font-semibold my-4">{children}</strong>,
     h3: ({ children }) => <h3 className="text-xl font-bold text-white mt-4 mb-2">{children}</h3>,
   };
 

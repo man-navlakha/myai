@@ -16,7 +16,7 @@ const Hello = () => {
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'assistant', message: string }[]>([]);
-  const {transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -77,7 +77,6 @@ const Hello = () => {
       });
 
       const result = response.data || 'No review received.';
-      console.log(result)
       setChatHistory(prev => [...prev, { role: 'assistant', message: result }]);
       setCode('');
     } catch (error) {
@@ -92,7 +91,7 @@ const Hello = () => {
 
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen dark:bg-[#212121]">
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
 
@@ -110,7 +109,7 @@ const Hello = () => {
           )}
 
           {chatHistory.map((entry, idx) => (
-            <div key={idx} className={`p-3 rounded-3xl ${entry.role === 'user' ? 'bg-gray-400/30 dark:bg-gray-500/50 max-w-md self-end ' : ' self-start'}`}>
+            <div key={idx} className={`px-3 py-1 rounded-3xl ${entry.role === 'user' ? 'bg-gray-400/30 dark:bg-gray-500/50 self-end ' : ' self-start'}`}>
               <MarkdownRenderer message={entry.message} />
              
             <div className={`flex  p-1 gap-1 ${entry.role === 'user' ? 'hidden' : 'visible'}`}>
@@ -125,14 +124,14 @@ const Hello = () => {
 
 
         {/* Input Panel */}
-        <div className="w-full sticky  bottom-0 px-4 py-3 mt-5">
-          <div className="max-w-4xl overflow-hidden mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-md border border-black/20 dark:border-white/20 bg-white/10 backdrop-blur-lg">
+        <div className="w-full sticky bottom-0 px-4 py-3 mt-5 overflow-hidden">
+          <div className="max-w-4xl overflow-hidden mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-md border border-black/20 dark:border-[white]/20 dark:bg-[#303030]/80 backdrop-blur-lg z-2">
 
             <div className="flex flex-col sm:flex-row gap-3">
             
               <textarea
                 ref={textareaRef}
-                className="flex-1 w-full resize-none text-black overflow-y-auto rounded-lg p-3 min-h-[4rem] max-h-40 bg-white/20 dark:bg-black/30 border dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
+                className="flex-1 rounded w-full mb-3 text-black overflow-y-auto min-h-[4rem] max-h-40 bg-white/50 z-2 dark:bg-[#303030]/0 border-none md:border-b outline-none dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
                 placeholder="Type your message..."
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
@@ -165,7 +164,7 @@ const Hello = () => {
                     onClick={handleSend}
                     disabled={loading}
                     aria-label="Send message"
-                    className={`p-3 rounded-xl transition ${loading
+                    className={`p-3 rounded-xl transition  ${loading
                         ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-blue-600 hover:bg-blue-700 text-white'
                       }`}
@@ -183,8 +182,8 @@ const Hello = () => {
             <p className="text-center text-sm text-black/70 dark:text-white/50 mt-2">
               Solvinger may make mistakes. Always verify responses.
             </p>
-      <div className="blur-3xl w-[70%] rounded-full h-28 absolute -bottom-28 bg-gradient-to-r from-pink-500 via-indigo-500 to-cyan-500" ></div>
           </div>
+      <div className={`{ -z-2 mrwave ${listening ?'bg-gradient-to-r from-pink-100 via-red-500 to-rose-800':`${code.trim() ? 'visible' : 'hidden'}`} blur-3xl w-[140%] -mx-4 rounded-full h-28 absolute -bottom-20 bg-gradient-to-r from-pink-500 via-indigo-500 to-cyan-500`} ></div>
         </div>
       </div>
     </div>

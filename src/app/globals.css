@@ -230,6 +230,32 @@
 }
 
 
+
+@keyframes gradient-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes wave-motion {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-3px) scaleY(1.2); }
+}
+
+.mrwave {
+  animation: gradient-slide 5s linear infinite, wave-motion 2s ease-in-out infinite;
+  background-size: 200% 200%;
+  filter: blur(40px);
+  margin: -3px;
+}
+
+
+
+
+
+
+
+
+
 /* send button  */
 .move-right {
   display: inline-block;
