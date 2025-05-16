@@ -16,7 +16,7 @@ const Hello = () => {
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'assistant', message: string }[]>([]);
-  const { transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
+  const {transcript, resetTranscript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -110,7 +110,7 @@ const Hello = () => {
           )}
 
           {chatHistory.map((entry, idx) => (
-            <div key={idx} className={`p-3 rounded-3xl ${entry.role === 'user' ? 'bg-gray-400/30 dark:bg-gray-500/50 self-end ' : ' self-start'}`}>
+            <div key={idx} className={`p-3 rounded-3xl ${entry.role === 'user' ? 'bg-gray-400/30 dark:bg-gray-500/50 max-w-md self-end ' : ' self-start'}`}>
               <MarkdownRenderer message={entry.message} />
              
             <div className={`flex  p-1 gap-1 ${entry.role === 'user' ? 'hidden' : 'visible'}`}>

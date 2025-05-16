@@ -1,10 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css'; // Choose a theme
-
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Copy } from 'lucide-react';
@@ -28,15 +24,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       const language = className?.replace('language-', '') || 'text';
       const isInline = !className;
 
-       const codeRef = useRef(null);
-
-  useEffect(() => {
-    if (codeRef.current) {
-      hljs.highlightElement(codeRef.current);
-    }
-  }, [codeText, language]); // Re-run when code or language changes
-
-
       if (isInline) {
         return (
           <code className="bg-gray-200 dark:bg-gray-200/30 px-1 py-0.5 rounded text-sm font-mono">
@@ -46,8 +33,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
       }
 
       return (
-        <div className="relative bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full my-2 md:max-w-4xl">
-          <div className="flex items-center justify-between text-xs px-4 py-2 bg-[#2d2d2d] text-white font-mono">
+        <div className="relative dark:bg-[#1e1e1e] border-gray-300 dark:border-none border rounded-md overflow-hidden mb-4 w-full max-w-full md:max-w-4xl">
+          <div className="flex items-center justify-between text-xs px-4 py-2 dark:bg-[#2d2d2d] bg-[#ddd] dark:text-white font-mono">
             <span className="lowercase">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(codeText)}
@@ -56,16 +43,15 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ message }) => {
              <Copy className='h-4'/> Copy
             </button>
           </div>
-          <div className="overflow-auto dark:bg-[#171717]">
-              <pre><code ref={codeRef} className={`language-${language} dark:bg-[#171717]`}>{codeText}</code></pre>
-            {/* <pre className="p-4 text-sm  whitespace-pre! language-javascript break-words">
+          <div className="overflow-auto dar:bg-[#171717]">
+            <pre className="p-4 text-sm  whitespace-pre! language-javascript break-words">
               <code className={`language-${language}`}>{codeText}</code>
-            </pre> */}
+            </pre>
           </div>
         </div>
       );
     },
-    strong: ({ children }) => <h1 className="font-semibold my-2 ">{children}</h1>,
+    strong: ({ children }) => <strong className="font-semibold m-1">{children}</strong>,
     h3: ({ children }) => <h3 className="text-xl font-bold text-white mt-4 mb-2">{children}</h3>,
   };
 
