@@ -124,28 +124,28 @@ const Hello = () => {
 
 
         {/* Input Panel */}
-        <div className="w-full sticky bg-gradient-to-b from-transparent via-transparent to-rose-800/80 bottom-0 px-2 py-3 min-h-10 mt-5 overflow-hidden">
-          <div className="max-w-4xl overflow-hidden mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-md border-black/20 dark:border-[white]/20 dark:bg-[#303030]/80 bg-white/60 backdrop-blur-lg z-2">
+        <div className="w-full sticky bg-gradient-to-b from-transparent via-transparent to-gray-400 dark:to-gray-800/100 bottom-0 px-2 py-3 min-h-10 mt-5 overflow-hidden">
+          <div className="max-w-4xl overflow-hidden mx-auto flex flex-col gap-3 rounded-xl p-4 shadow-lg border border-black/20 dark:border-[white]/20 dark:bg-[#303030]/80 bg-white/60 backdrop-blur-lg z-2">
 
             <div className="flex flex-col sm:flex-row gap-3">
             
               <textarea
                 ref={textareaRef}
-                className="flex-1 rounded w-full mb-3 text-black overflow-y-auto min-h-10 max-h-40 bg-white/0 z-2 dark:bg-[#303030]/0 border-none md:border-b outline-none dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
+                className="rounded w-full mb-3 text-black overflow-y-auto min-h-10 max-h-40 bg-white/0 z-2 dark:bg-[#303030]/0 border-none md:border-b outline-none dark:border-white/30 border-black/30 text-black dark:text-white dark:placeholder:text-white/60 textarea-wrapper "
                 placeholder="Type your message..."
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                disabled={loading}
+                disabled={listening || loading}
                 />
 
-              <div className="flex gap-2 items-center justify-between">
+              <div className="flex gap-2 items-center items-end-safe justify-between">
                 <div className="relative flex flex-col items-center">
 
                   <button
                     onClick={handleToggleListening}
                     aria-label="Toggle voice input"
-                    className={`mic-button py-3 px-2 rounded-xl border overflow-hidden transition ${listening
-                        ? 'bg-red-500 text-white'
+                    className={`mic-button py-3 px-2 border-black/30 rounded-xl border overflow-hidden transition ${listening
+                        ? 'bg-red-500 text-white '
                         : 'bg-white/20 hover:bg-gray-300/30 dark:hover:bg-white/30 text-black dark:text-white'
                       } dark:border-white/20 `}
                   >

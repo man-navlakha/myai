@@ -255,6 +255,12 @@
 
 
 
+.textarea-wrapper {
+    -webkit-appearance: none; /* For iOS */
+    box-sizing: border-box;
+}
+
+
 
 /* send button  */
 .move-right {
