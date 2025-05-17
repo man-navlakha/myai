@@ -53,9 +53,9 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ onItemClick }) => {
       </div>
 
       {/* Header */}
-      <div className="mt-10 text-center">
-        <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-          What’s on <AuroraText className="font-black">your mind?</AuroraText>
+      <div className="mt-10 text-center px-1">
+        <h3 className="text-2xl md:text-4xl font-extrabold tracking-tight">
+          What’s on <AuroraText className="font-black">your mind ? </AuroraText>
         </h3>
         <p className="mt-2 text-lg text-neutral-700 dark:text-neutral-300">
           Now Solvinger can do it for you 😊
@@ -63,7 +63,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ onItemClick }) => {
       </div>
 
       {/* Feature Cards Grid */}
-      <div className="mt-14 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mt-8 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
       {features.map((feature, index) => (
         <FeatureColumn key={index} title={feature.title} items={feature.items} onItemClick={onItemClick} />
       ))}

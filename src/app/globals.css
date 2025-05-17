@@ -237,8 +237,8 @@
 }
 
 @keyframes wave-motion {
-  0%, 100% { transform: translateY(0) scaleY(1); }
-  50% { transform: translateY(-3px) scaleY(1.2); }
+  0%, 100% { transform: translateY(0) scaleY(0.5); }
+  50% { transform: translateY(-6px) scaleY(1); }
 }
 
 .mrwave {
