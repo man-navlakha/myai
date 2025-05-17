@@ -9,13 +9,18 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, onToggleSidebar }: SidebarProps) => {
   return (
     <div
-    className={`fixed top-0 left-0 z-50 h-screen transition-all duration-300 ease-in-out
-      ${isOpen ? 'w-screen md:w-64' : 'w-0 md:w-0 overflow-hidden'}
- bg-white/70 dark:bg-black/80 backdrop-blur-md shadow-md border-r border-white/20 text-black dark:text-white`}
+    className={`
+    fixed top-0 left-0 z-50 h-screen 
+    transition-all duration-300 ease-in-out
+    ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+    w-64 bg-white/70 dark:bg-black/80 
+    backdrop-blur-md shadow-md border-r border-white/20
+    text-black dark:text-white
+  `}
   >
     {/* Header */}
-    <div className="flex items-center justify-between p-4 border-b border-gray-300 dark:border-gray-700">
-      <span className="text-xl font-semibold">Solvinger</span>
+    <div className="flex items-center justify-between p-3 border-b border-gray-300 dark:border-gray-700">
+      <span className="text-2xl font-semibold">Solvinger</span>
       <button onClick={onToggleSidebar} aria-label="Close sidebar">
         <ArrowLeftToLine className="w-5 h-5" />
       </button>

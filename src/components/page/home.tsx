@@ -96,7 +96,8 @@ const Hello = () => {
       <Sidebar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1">
+      <div className={`flex flex-col flex-1 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'md:ml-64' : ''}`}>
+
 
         {/* Navbar */}
         <Navbar isOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} />

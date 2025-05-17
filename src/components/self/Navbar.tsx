@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-// import { MagicCard } from "@/components/magicui/magic-card";
+import Link from 'next/link'; // Import Link
 import { GripVertical   } from "lucide-react";
 
 interface NavbarProps {
@@ -19,7 +19,6 @@ export function Navbar({ isOpen,onToggleSidebar }: NavbarProps) {
   return (
     <div className="w-full sticky top-0 z-10 bg-white/30 dark:bg-black/30 backdrop-blur-md bg-opacity-10 border-b border-white/20 shadow-sm px-4 py-2">
     <div className="flex justify-between items-center max-w-7xl mx-auto">
-      
       {/* Left: Logo & Sidebar Toggle */}
       <div className="flex items-center gap-3">
         {!isOpen && (
@@ -44,14 +43,14 @@ export function Navbar({ isOpen,onToggleSidebar }: NavbarProps) {
   
       {/* Right: Controls */}
       <div className="flex items-center gap-3">
-        <Button onClick={() => router.push('/auth/login')} className="text-sm ">
-          Login
-        </Button>
+        <Link href="/auth/login"> {/* Use Link for internal navigation */}
+          <Button className="text-sm">
+            Login
+          </Button>
+        </Link>
         <ModeToggle />
       </div>
     </div>
   </div>
-  
-
   );
 }
