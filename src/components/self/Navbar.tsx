@@ -4,7 +4,6 @@ import * as React from "react";
 import { Button } from "../ui/button";
 import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 import Link from 'next/link'; // Import Link
 import { GripVertical   } from "lucide-react";
 
@@ -14,7 +13,6 @@ interface NavbarProps {
 }
 
 export function Navbar({ isOpen,onToggleSidebar }: NavbarProps) {
-  const router = useRouter();
 
   return (
     <div className="w-full sticky top-0 z-10 bg-white/30 dark:bg-black/30 backdrop-blur-md bg-opacity-10 border-b border-white/20 shadow-sm px-4 py-2">
